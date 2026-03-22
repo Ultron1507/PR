@@ -10,19 +10,27 @@
 <body class="h-full">
     <div class="w-full h-full bg-zinc-900 p-10 text-white gap-4">
         <div class="nav mb-10">
-            <a href="/" class="text-blue-700">Back to Home</a>
+            <a href="/" class="text-blue-700">Create User</a>
         </div>
         <h1 class="text-3xl font-bold mb-6">All Users</h1>
         <div class="users flex gap-3 flex-wrap">
-            <div class="user max-w-72 p-4 bg-zinc-700 rounded-lg">
-                <div class="h-52 w-full rounded-lg bg-zinc-400"></div>
-                <h3 class="text-xl mt-3 tracking-tighter">Puspita Das</h3>
-                <h5 class="text-gray-400">puspita@example.com</h5>
+            <% if (users.length > 0) { %>
+                 <% users.forEach(function(user) { %>
+                    <div class="user max-w-72 p-4 bg-zinc-700 rounded-lg">
+                <div class="h-52 w-full rounded-lg bg-zinc-400 overflow-hidden">
+                    <img class="w-full h-full object-cover" src="<%= user.image %>" alt="">
+                </div>
+                <h3 class="text-xl mt-3 tracking-tighter"><%= user.name %></h3>
+                <h5 class="text-gray-400"><%= user.email %></h5>
                 <div class="flex gap-20 mt-10">
                     <a class="text-blue-500" href="">Edit User</a>
-                    <a class="text-red-500" href="">Delete User</a>
+                    <a class="text-red-500" href="/delete/<%= user._id %>">Delete User</a>
                 </div>
             </div>
+            <% }) %>
+           <% } else { %>
+                <h3 class="text-gray-400">No users found.</h3>
+            <% } %>
         </div>
     </div>
 </body>
